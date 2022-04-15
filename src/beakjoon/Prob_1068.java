@@ -1,6 +1,8 @@
 package beakjoon;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Prob_1068 {
@@ -29,14 +31,8 @@ public class Prob_1068 {
     static void remove_node() {
         //지울 노드의 자식노드의 모든 자식들 삭제
         Queue<Integer> q = new LinkedList<>();
-        q.offer(remove);
-        while (!q.isEmpty()) {
-            int n = q.poll();
-            if (!node_list[n].isEmpty()) {
-                for (int i : node_list[n]) q.offer(i);
-                node_list[n].clear();
-            }
-        }
+        for (List l : node_list) if (l.contains(remove)) l.remove(l.indexOf(remove));
+        for (int i : node_list[remove]) node_list[i].clear();
     }
 
     static void find_leaf_node() {
@@ -44,11 +40,8 @@ public class Prob_1068 {
         q.offer(root);
         while (!q.isEmpty()) {
             int n = q.poll();
-            if (node_list[n].isEmpty() || node_list[n].size() == 1 && node_list[n].contains(remove)) {
-                count++;
-            } else {
-                for (int i : node_list[n]) if (i != remove) q.offer(i);
-            }
+            if (node_list[n].isEmpty()) count++;
+            else for (int i : node_list[n]) q.offer(i);
         }
     }
 
