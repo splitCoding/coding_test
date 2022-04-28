@@ -6,42 +6,43 @@ import java.util.*;
 public class Prob_3584 {
     static FastReader scan = new FastReader();
     static int N, n1, n2;
-    static List<Integer> n1_p, n2_p;
+    static boolean[] check;
     static int[] nodes;
 
     static void input() {
         N = scan.nextInt();
         nodes = new int[N + 1];
+        check = new boolean[N + 1];
         for (int i = 0; i < N - 1; i++) {
             int p = scan.nextInt(), c = scan.nextInt();
             nodes[c] = p;
         }
         n1 = scan.nextInt();
         n2 = scan.nextInt();
-        n1_p = new ArrayList<>();
-        n2_p = new ArrayList<>();
     }
 
-    static void dfs(List l, int k) {
-        if (k == 0) return;
-        l.add(k);
-        dfs(l, nodes[k]);
+    static void solution() {
+        int i = n1;
+        while (i > 0) {
+            check[i] = true;
+            i = nodes[i];
+        }
+        i = n2;
+        while (i > 0) {
+            if (check[i]) {
+                System.out.println(i);
+                break;
+            } else {
+                i = nodes[i];
+            }
+        }
     }
 
     public static void main(String[] args) {
         int T = scan.nextInt();
         for (int i = 0; i < T; i++) {
             input();
-            dfs(n1_p, n1);
-            int k = n2;
-            while (k != 0) {
-                if (n1_p.contains(k)) {
-                    System.out.println(k);
-                    break;
-                } else {
-                    k = nodes[k];
-                }
-            }
+            solution();
         }
     }
 
