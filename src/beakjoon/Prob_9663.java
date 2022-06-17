@@ -1,6 +1,43 @@
 package beakjoon;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 public class Prob_9663 {
+    private static class FastReader {
+        BufferedReader bf;
+        StringTokenizer st;
+
+        FastReader() {
+            bf = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            try {
+                while (st == null || !st.hasMoreElements()) {
+                    st = new StringTokenizer(bf.readLine());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+    }
+
     static int N;
     static int[] queens;
     static int count;
